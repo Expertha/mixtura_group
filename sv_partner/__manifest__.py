@@ -20,7 +20,7 @@
 
     # any module necessary for this one to work correctly
     'depends': ['base','account'],
-
+    'license': 'GPL-3',
     # always loaded
     'data': [
         'views/views.xml',

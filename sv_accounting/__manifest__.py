@@ -17,7 +17,7 @@
     # for the full list
     'category': 'Uncategorized',
     'version': '15.0',
-
+    'license': 'GPL-3',
     # any module necessary for this one to work correctly
     'depends': ['base','account','sale','sv_partner'],
 
