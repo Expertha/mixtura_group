@@ -78,7 +78,7 @@ class PosSession(models.Model):
                     invoice_credito_set = 0.00
 
                     for pos_orders in orders:
-                        if pos_orders.account_move == False:
+                        if not pos_orders.account_move:
                             for lines in pos_orders.lines:
                                 if lines.tax_ids_after_fiscal_position.name == 'IVA Consumidor.':
                                     pos_grav_total += lines.price_subtotal_incl
