@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<odoo>
+
+        <record id="gift_card_report_pdf_custom" model="ir.actions.report">
+            <field name="name">Gift Card Custom</field>
+            <field name="model">gift.card</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">pos_gift_card_custom.gift_card_template_custom</field>
+            <field name="binding_type">report</field>
+            <field name="binding_model_id" ref="gift_card.model_gift_card"/>
+        </record>
+
+        <record id="paperformat_gift_card_report_custom" model="report.paperformat">
+            <field name="name">Gift Card Custom Paper Format</field>
+            <field name="default" eval="True" />
+            <field name="format">custom</field>
+            <field name="page_height">30</field>
+            <field name="page_width">43</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">4</field>
+            <field name="margin_bottom">1</field>
+            <field name="margin_left">1</field>
+            <field name="margin_right">1</field>
+            <field name="header_line" eval="False" />
+            <field name="header_spacing">0</field>
+            <field name="dpi">90</field>
+            <field name="report_ids" eval="[(6,0,[ref('pos_gift_card_custom.gift_card_report_pdf_custom')])]"/>
+        </record>
+
+</odoo>

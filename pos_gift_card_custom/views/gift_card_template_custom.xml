@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- the product used to deduce on sale order -->
+        <record id="gift_card.pay_with_gift_card_product" model="product.product">
+            <field name="available_in_pos">True</field>
+        </record>
+
+        <template id="gift_card_template_custom">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="web.basic_layout">
+
+                        <div class="page" align="center">
+						    <!-- Monto -->
+                            <div t-if="o.initial_amount" align="center"
+                                t-attf-style="color:black;font-weight:3px">
+                                <span style="font-size: 7px;">$</span> <span style="font-size: 7px;" t-esc="'{0:,.2f}'.format(o.initial_amount)" />
+                            </div>
+                            <!-- Codigo de Barra -->
+                            <div style="padding:0; margin:0px; padding-top:10px; padding-bottom:10px; text-align:center;">
+                                <img t-att-src="'/report/barcode/Code128/'+o.code" style="width:190px;height:30px" alt="Barcode"/>
+                            </div>
+                             <!-- Fecha de expiracion -->
+                             <div t-if="o.expired_date" align="center"
+                                t-attf-style="color:black;font-weight:3px">
+                               <span style="font-size: 7px;">Expira:</span>  <span style="font-size: 7px;" t-esc="o.expired_date" />
+                            </div>
+					    </div>
+					    <p style="page-break-before:always;" />
+
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

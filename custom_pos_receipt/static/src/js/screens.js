@@ -1,4 +1,4 @@
-odoo.define('l10n_cl_dte_point_of_sale.screens', function (require) {
+odoo.define('custom_pos_receipt.screens', function (require) {
 "use strict";
 
   var PaymentScreen = require('point_of_sale.PaymentScreen');
@@ -93,6 +93,15 @@ odoo.define('l10n_cl_dte_point_of_sale.screens', function (require) {
                 }
             }
         }
+
+       is_to_ticket_regalo(){
+            return false;
+      	}
+
+        click_ticket_regalo(){
+            alert('QUE DAS?')
+      		this.render();
+      	}
 
 
       }

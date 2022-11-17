@@ -21,6 +21,22 @@ odoo.define('custom_pos_receipt.models', function (require) {
         },
     });
 
+//   var _super_order = models.Order.prototype;
+   exports.Order = Backbone.Model.extend({
+        initialize: function(attributes,options){
+            this.to_ticket_regalo = false;
+         },
+        set_ticket_regalo: function(to_ticket_regalo) {
+            this.assert_editable();
+            this.to_ticket_regalo = to_ticket_regalo;
+        },
+
+
+        is_to_ticket_regalo: function(){
+            return this.to_ticket_regalo;
+        },
+    });
+
     var _super_orderline = models.Orderline.prototype;
     models.Orderline = models.Orderline.extend({
          export_for_printing: function () {
@@ -28,6 +44,7 @@ odoo.define('custom_pos_receipt.models', function (require) {
             res.default_code = this.get_product().default_code;
             return res;
      },
+
 
     });
 
