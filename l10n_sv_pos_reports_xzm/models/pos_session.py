@@ -78,16 +78,17 @@ class PosSession(models.Model):
                     invoice_credito_set = 0.00
 
                     for pos_orders in orders:
-                        if not pos_orders.account_move:
-                            for lines in pos_orders.lines:
-                                if lines.tax_ids_after_fiscal_position.name == 'IVA Consumidor.':
-                                    pos_grav_total += lines.price_subtotal_incl
-                                if lines.tax_ids_after_fiscal_position.name == 'IVA Incluido':
-                                    pos_grav_total += lines.price_subtotal_incl
-                                if lines.tax_ids_after_fiscal_position.name == 'Exento venta':
-                                    pos_exen_total += lines.price_subtotal_incl
-                                if lines.tax_ids_after_fiscal_position.name == 'No Sujeto Venta':
-                                    pos_total_nosuj += lines.price_subtotal_incl
+                        if pos_orders.payment_ids:
+                            if not pos_orders.account_move:
+                                for lines in pos_orders.lines:
+                                    if lines.tax_ids_after_fiscal_position.name == 'IVA Consumidor.':
+                                        pos_grav_total += lines.price_subtotal_incl
+                                    if lines.tax_ids_after_fiscal_position.name == 'IVA Incluido':
+                                        pos_grav_total += lines.price_subtotal_incl
+                                    if lines.tax_ids_after_fiscal_position.name == 'Exento venta':
+                                        pos_exen_total += lines.price_subtotal_incl
+                                    if lines.tax_ids_after_fiscal_position.name == 'No Sujeto Venta':
+                                        pos_total_nosuj += lines.price_subtotal_incl
 
                     # SUMATORIA DE CONSUMIDOR FINAL
                     for invoice_orders_fac in invoice_fac:
@@ -105,6 +106,8 @@ class PosSession(models.Model):
                     for invoice_orders_ccf in invoice_ccf:
                         for lines in invoice_orders_ccf.invoice_line_ids:
                             if lines.tax_ids.name == 'IVA Contribuyente.':
+                                ccf_grav_total += lines.price_total
+                            if lines.tax_ids.name == 'IVA Incluido':
                                 ccf_grav_total += lines.price_total
                             if lines.tax_ids.name == 'Exento venta':
                                 ccf_exen_total += lines.price_total
