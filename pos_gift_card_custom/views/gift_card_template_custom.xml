@@ -17,6 +17,10 @@
                                 t-attf-style="color:black;font-weight:3px">
                                 <span style="font-size: 7px;">$</span> <span style="font-size: 7px;" t-esc="'{0:,.2f}'.format(o.initial_amount)" />
                             </div>
+                            <div t-if="o.code" align="center"
+                                t-attf-style="color:black;font-weight:3px">
+                                <span style="font-size: 7px;" t-esc="o.code" />
+                            </div>
                             <!-- Codigo de Barra -->
                             <div style="padding:0; margin:0px; padding-top:10px; padding-bottom:10px; text-align:center;">
                                 <img t-att-src="'/report/barcode/Code128/'+o.code" style="width:190px;height:30px" alt="Barcode"/>
