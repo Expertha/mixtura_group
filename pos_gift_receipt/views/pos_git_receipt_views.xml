@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record id="pos_config_view_form_inherit_pos_gift_receipt" model="ir.ui.view">
+            <field name="name">pos.config.form.inherit.pos.gift_receipt</field>
+            <field name="model">pos.config</field>
+            <field name="inherit_id" ref="point_of_sale.pos_config_view_form" />
+            <field name="arch" type="xml">
+                <div id="pos-loyalty" position="after">
+                    <div class="col-12 col-lg-6 o_setting_box" id="pos-gift-receipt">
+                        <div class="o_setting_left_pane">
+                            <field name="module_pos_gift_receipt" attrs="{'readonly': [('has_active_session','=', True)]}"/>
+                        </div>
+                        <div class="o_setting_right_pane">
+                            <label for="module_pos_gift_receipt" string="Impresion de ticket de regalo"/>
+                            <div class="text-muted mb16">
+                                Habilita el boton para impresion de ticket de regalo.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </field>
+        </record>
+
+</odoo>
