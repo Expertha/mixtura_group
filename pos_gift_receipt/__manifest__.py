@@ -9,7 +9,7 @@
     'sequence': 6,
     'summary': 'Impresion de ticket de regalo ',
     'description': """
-
+    'author': "Expertha(Nestor Ulloa)",
     Impresion de ticket de regalo
     
     """,

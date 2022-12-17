@@ -93,15 +93,15 @@ odoo.define('custom_pos_receipt.screens', function (require) {
                 }
             }
         }
-
-       is_to_ticket_regalo(){
-            return false;
-      	}
-
-        click_ticket_regalo(){
-            alert('QUE DAS?')
-      		this.render();
-      	}
+//
+//       is_to_ticket_regalo(){
+//            return false;
+//      	}
+//
+//        click_ticket_regalo(){
+//            alert('QUE DAS?')
+//      		this.render();
+//      	}
 
 
       }
