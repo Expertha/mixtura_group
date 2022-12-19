@@ -89,6 +89,10 @@ class PosSession(models.Model):
                                         pos_exen_total += lines.price_subtotal_incl
                                     if lines.tax_ids_after_fiscal_position.name == 'No Sujeto Venta':
                                         pos_total_nosuj += lines.price_subtotal_incl
+                                    if not lines.tax_ids_after_fiscal_position.name:
+                                        if lines.full_product_name == 'Tarjeta de regalo':
+                                            pos_grav_total += lines.price_subtotal_incl
+
 
                     # SUMATORIA DE CONSUMIDOR FINAL
                     for invoice_orders_fac in invoice_fac:
