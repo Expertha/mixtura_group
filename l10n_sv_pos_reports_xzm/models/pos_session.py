@@ -1,6 +1,5 @@
 from odoo import fields, models, api
-from datetime import datetime
-# import datetime
+from datetime import datetime, timezone, timedelta
 import calendar
 
 from odoo.exceptions import AccessError, UserError, ValidationError
@@ -12,7 +11,8 @@ class PosSession(models.Model):
     cortez_id = fields.Many2one('corte.z', related='cortex_id.cortez_id', readonly=True, string='Corte Z')
 
     def generar_cortex(self):
-        fecha = datetime.strftime(self.start_at, '%Y-%m-%d')
+        fecha_utc = self.start_at - timedelta(hours=6)
+        fecha = datetime.strftime(fecha_utc, '%Y-%m-%d')
         cortez = self.env['corte.z'].search([('fecha', '=', fecha)])
         if len(cortez) == 0:
             if self.state == 'closed':
@@ -138,7 +138,7 @@ class PosSession(models.Model):
 
                     cortex = self.env['corte.x']
                     cortex_id = cortex.create({
-                        'fecha': self.start_at,
+                        'fecha': fecha,
                         'fecha_impresion': datetime.now(),
                         'fact_total_num_desde': fact_total_num_desde,
                         'fact_total_num_hasta': fact_total_num_hasta,
@@ -190,7 +190,8 @@ class PosSession(models.Model):
             raise UserError('Existe un corte Z en este dia, no puede hacer un corte X.')
 
     def generar_cortez(self):
-        fecha = datetime.strftime(self.start_at, '%Y-%m-%d')
+        fecha_utc = self.start_at - timedelta(hours=6)
+        fecha = datetime.strftime(fecha_utc, '%Y-%m-%d')
         cortexvalidation = self.env['corte.x'].search([('fecha', '=', fecha)])
         if len(cortexvalidation) == 0:
             raise UserError('No existe ningun Corte X en este dia.')
@@ -302,7 +303,7 @@ class PosSession(models.Model):
 
             cortez = self.env['corte.z']
             cortez_id = cortez.create({
-                'fecha': self.start_at,
+                'fecha': fecha,
                 'fecha_impresion': datetime.now(),
                 'fact_total_num_desde': z_fact_total_num_desde,
                 'fact_total_num_hasta': z_fact_total_num_hasta,
